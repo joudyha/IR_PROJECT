@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SOA Pipeline</title>
+</head>
+<body>
+  <h2>اختر مجموعة البيانات:</h2>
+  <select id="dataset">
+    <option value="antique">Antique</option>
+    <option value="lotte">Lotte</option>
+  </select>
+  <button onclick="runOffline()">تشغيل معالجة أولية</button>
+
+  <hr>
+  <h2>استعلام المستخدم:</h2>
+  <input type="text" id="query" placeholder="اكتب استعلامك">
+  <button onclick="search()">بحث</button>
+
+  <h3>أفضل النتائج:</h3>
+  <pre id="results"></pre>
+
+  <script>
+    async function runOffline() {
+      const dataset = document.getElementById("dataset").value;
+      const res = await fetch("http://localhost:8000/run_pipeline", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ dataset_name: dataset })
+      });
+      const data = await res.json();
+      alert("تمت المعالجة الأولية!");
+    }
+
+    async function search() {
+      const query = document.getElementById("query").value;
+      const res = await fetch("http://localhost:8005/run_query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: query })
+      });
+      const data = await res.json();
+      document.getElementById("results").textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+##INSTALL_REQUIREMENT_PACKAGES##
+
+pip install -r requirements.txt
+
+
+
+
+##RUN SERVICES##
+
+#RUN LOAD_SERVICE
+
+py -m uvicorn services.offline.load_services:app --port 8001 --reload
+
+#RUN PROCESSING_SERVICE
+
+py -m uvicorn services.offline.document_preprocessing_service:app --port 8004 --reload 
+
+#RUN TFIDF_REPRESENTATION_SERVICE
+
+py -m uvicorn services.offline.representations.tfidf_representation_service:app --port 8002 --reload
+
+#RUN INVERTED_INDEX_SERVICE
+
+py -m uvicorn services.offline.inverted_index_service:app --port 8003 --reload
+
+
+
+
+
+1.run one of these services
+
+2.check it using postman
