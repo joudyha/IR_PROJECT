@@ -20,11 +20,9 @@ def clean_stored_docs(dataset_name: str = Query(...)):
             LIMIT ?
         """, (dataset_name, BATCH_SIZE))
         rows = cursor.fetchall()
-
         if not rows:
-            break  # لا يوجد المزيد
+            break
 
-        # 2. نظف وأحدث المستندات
         for doc_id, text in rows:
             cleaned = clean_text(text)
             cursor.execute(
@@ -32,6 +30,7 @@ def clean_stored_docs(dataset_name: str = Query(...)):
                 (cleaned, doc_id, dataset_name)
             )
             total_updated += 1
+
 
         # 3. احفظ التغييرات في كل دفعة
         conn.commit()

@@ -11,9 +11,12 @@ app = FastAPI()
 @app.post("/build_inverted_index")
 def build_index(dataset_name: str = Query(...)):
     conn = sqlite3.connect(SQLITE_DB_PATH)
-    
-    # استرجاع البيانات الخاصة بالـ dataset فقط
-    df = pd.read_sql("SELECT doc_id, processed_text FROM docs WHERE dataset_name = ?", conn, params=(dataset_name,))
+    query = (
+        "SELECT doc_id, processed_text "
+        "FROM docs "
+        "WHERE dataset_name = ? AND processed_text IS NOT NULL"
+    )
+    df = pd.read_sql(query, conn, params=[dataset_name])
 
     index = defaultdict(set)
     for _, row in df.iterrows():

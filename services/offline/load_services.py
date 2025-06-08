@@ -57,6 +57,7 @@ def load_raw_docs(dataset_name: str = Query(...)):
 
         # 2. اقرأ الملف إلى DataFrame
         df = pd.read_csv(path, sep="\t")
+        print("Columns in TSV file:", df.columns.tolist())
 
         # 3. افتح اتصال SQLite
         conn = sqlite3.connect(SQLITE_DB_PATH)
