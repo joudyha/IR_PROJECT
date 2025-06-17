@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>SOA Pipeline</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>اختر مجموعة البيانات:</h2>
+  <select id="dataset">
+    <option value="antique">Antique</option>
+    <option value="lotte">Lotte</option>
+  </select>
+
+  <h2>اختر طريقة التمثيل:</h2>
+  <select id="representation">
+    <option value="tfidf">TF-IDF</option>
+    <option value="embedding">Embedding</option>
+    <option value="hybrid">Hybrid</option>
+  </select>
+
+  <button onclick="runOffline()">تشغيل معالجة أولية</button>
+
+  <hr>
+  <h2>استعلام المستخدم:</h2>
+  <input type="text" id="query" placeholder="اكتب استعلامك هنا">
+  <button onclick="search()">بحث</button>
+
+  <h3>أفضل النتائج:</h3>
+  <div id="results"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

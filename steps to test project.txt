@@ -1,0 +1,11 @@
+just write in terminal :
+
+.\run_tfidf.bat
+
+OR
+
+.\run_embedding.bat
+
+OR
+
+.\run_hybrid.bat
