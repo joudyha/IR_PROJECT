@@ -14,7 +14,7 @@ class QueryRequest(BaseModel):
     query: str
     dataset_name: str
 
-@app.post("/run_query_tfidf")
+@app.post("/run_query_bm25")
 async def run_query_tfidf(req: QueryRequest):
     qid = get_next_qid()
     async with httpx.AsyncClient(timeout=30.0) as client:
@@ -25,7 +25,7 @@ async def run_query_tfidf(req: QueryRequest):
         query_tokens = step1.json()["query_tokens"]
 
         # Step 2: تحويل إلى تمثيل tf-idf
-        step2 = await client.post(SERVICES_URL["Vectorize_Tfidf"], json={
+        step2 = await client.post(SERVICES_URL["Vectorize_Bm25"], json={
             "query_tokens": query_tokens,
             "dataset_name": req.dataset_name,
             "query_id": qid
@@ -35,7 +35,7 @@ async def run_query_tfidf(req: QueryRequest):
 
         # Step 3: الترتيب
         step3 = await client.post(SERVICES_URL["Ranking"], json={
-            "representation": "tfidf",
+            "representation": "bm25",
             "dataset": req.dataset_name,
             "query_id": qid
         })

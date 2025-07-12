@@ -84,11 +84,11 @@ async def run_pipeline(req: DatasetRequest):
     ds = req.dataset_name
     print("running step 1 ")
 
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        step1 = await client.post(SERVICES_URL["LOAD_RAW_DOCS"], params={"dataset_name": ds}, timeout=10)
-        if step1.status_code != 200:
-            return {"error": "loading failed", "detail": step1.text}
-        print("STEP 1 done")
+    async with httpx.AsyncClient(timeout=1000) as client:
+        # step1 = await client.post(SERVICES_URL["LOAD_RAW_DOCS"], params={"dataset_name": ds}, timeout=10)
+        # if step1.status_code != 200:
+        #     return {"error": "loading failed", "detail": step1.text}
+        # print("STEP 1 done")
 
         # print("running step 2 ")
         # step2 = await client.post(SERVICES_URL["CLEAN_STORED_DOCS"], params={"dataset_name": ds}, timeout=10)
@@ -111,7 +111,7 @@ async def run_pipeline(req: DatasetRequest):
     return {
         "status": "Pipeline completed",
         "details": {
-            "raw_load": step1.json(),
+            # "raw_load": step1.json(),
             "hybrid": step2.json(),
             # "hybrid": step3.json(),
             # "inverted_index": step3.json()

@@ -6,6 +6,9 @@ from typing import List
 from utils.middleware_cors_config import add_cors 
 
 
+
+
+
 app = FastAPI()
 add_cors(app)
 
@@ -20,6 +23,7 @@ def vectorize(cleaned: CleanedQuery):
 
     if not os.path.exists(model_path):
         return {"error": f"Model for dataset '{cleaned.dataset_name}' not found."}
+
 
     model = joblib.load(model_path)
     vectorizer = model["vectorizer"]

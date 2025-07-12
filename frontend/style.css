@@ -1,39 +1,249 @@
-/* style.css */
 body {
-  font-family: Arial, sans-serif;
-  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
   padding: 20px;
-  background-color: #f7f7f7;
-  color: #333;
-}
-
-select, input, button {
-  font-size: 16px;
-  padding: 8px;
-  margin: 5px 0;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-button {
-  background-color: #6c017abe;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #6c017abe;
+  direction: rtl;
 }
 
 h2, h3 {
-  color: #561964;
+  color: var(--purple-dark);
 }
 
-pre {
-  background-color: #eee;
-  padding: 10px;
-  border-radius: 5px;
-  max-height: 300px;
-  overflow-y: auto;
-  white-space: pre-wrap;
+:root {
+  --purple-main: #a259ff;
+  --purple-dark: #5e42a6;
+  --purple-light: #e0d7f9;
+  --purple-soft: #f9f6ff;
+  --purple-hover: #3f2d85;
 }
+
+
+select, input[type="text"], button {
+  padding: 8px;
+  margin: 5px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+}
+button {
+  background: linear-gradient(135deg, var(--purple-main), var(--purple-dark));
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(162, 89, 255, 0.4);
+}
+
+button:hover {
+  background: linear-gradient(135deg, var(--purple-dark), var(--purple-hover));
+  box-shadow: 0 4px 12px rgba(94, 66, 166, 0.6);
+}
+
+
+#embedding_options {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #eef;
+  border-radius: 8px;
+}
+
+#loading {
+  display: none;
+  color: green;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.result-item {
+  margin-bottom: 1.5em;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+.result-item h4 {
+  color: #0056b3;
+  margin-bottom: 6px;
+}
+
+.result-item p {
+  line-height: 1.5;
+  color: #444;
+}
+#suggestion_box {
+  margin: 10px 0;
+  background: var(--purple-soft);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--purple-light);
+  box-shadow: 0 2px 8px rgba(162, 89, 255, 0.2);
+}
+
+#suggestion_box button {
+  background-color: var(--purple-main);
+  margin: 0 10px 10px 0;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(162, 89, 255, 0.3);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  color: white;
+}
+
+#suggestion_box button:hover {
+  background-color: var(--purple-dark);
+  box-shadow: 0 4px 12px rgba(94, 66, 166, 0.4);
+}
+
+#autocomplete-list {
+  border: 1px solid var(--purple-light);
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(162, 89, 255, 0.2);
+}
+
+#autocomplete-list div:hover,
+#autocomplete-list div.autocomplete-active {
+  background-color: var(--purple-light);
+}
+
+.welcome-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #c678f3, #5f42af);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.welcome-container h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+  animation: popIn 1s ease-in-out;
+}
+
+.welcome-container p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  animation: slideUp 1.5s ease-in-out;
+}
+
+.welcome-container button {
+  padding: 12px 24px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #ebf0f1;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+}
+
+.welcome-container button:hover {
+  background-color: #e9e1e3;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+body.dark-mode {
+  background: linear-gradient(135deg, #1f1d36, #612d63);
+  color: #eae6ff;
+  font-family: 'Segoe UI', sans-serif;
+  transition: background 0.4s ease;
+}
+
+/* خلفية شبه شفافة (زجاجية) للصناديق */
+.dark-mode .container,
+.dark-mode .welcome-container,
+.dark-mode .card {
+  background: rgba(47, 39, 79, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(187, 134, 252, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+/* الأزرار */
+.dark-mode button,
+.dark-mode #toggleDarkMode {
+  background: linear-gradient(135deg, #bb86fc, #985eff);
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.dark-mode button:hover,
+.dark-mode #toggleDarkMode:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #bb86fc88;
+}
+
+/* مربعات النص والاختيارات */
+.dark-mode input,
+.dark-mode select {
+  background-color: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+  border: 1px solid #bb86fc66;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+/* قائمة الاقتراحات */
+.dark-mode #suggestion_box,
+.dark-mode #autocomplete-list {
+  background-color: rgba(39, 34, 66, 0.9);
+  color: white;
+  border: 1px solid #bb86fc44;
+  border-radius: 10px;
+}
+
+.dark-mode #autocomplete-list div:hover,
+.dark-mode #autocomplete-list div.autocomplete-active {
+  background-color: #5e42a6;
+}
+
+/* عناوين أنيقة */
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3 {
+  color: #d3bfff;
+  text-shadow: 0 0 6px #bb86fc44;
+}
+
+/* تحميل */
+.dark-mode #loading {
+  color: #bb86fc;
+  font-weight: bold;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+

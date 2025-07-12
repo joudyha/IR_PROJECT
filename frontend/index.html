@@ -1,34 +1,110 @@
+
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>SOA Pipeline</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    #loading { display: none; color: green; font-weight: bold; margin: 10px 0; }
+    .result-item { margin-bottom: 1em; border-bottom: 1px solid #ddd; padding-bottom: 8px; }
+    #suggestion_box p, #suggestion_box label { margin: 5px 0; }
+    #topicDetectionResult { margin-top: 10px; color: darkblue; font-weight: bold; }
+  </style>
 </head>
 <body>
+  <div id="welcome-screen" class="welcome-container">
+  <h1>✨ Welcome Soulyma! ✨</h1>
+  <p>جاهزة للتجربة؟ 🧠🔍</p>
+  <button onclick="hideWelcome()">ابدئي الآن 🚀</button>
+  </div>
+
   <h2>اختر مجموعة البيانات:</h2>
   <select id="dataset">
+    <option value="quora">Quora</option>
     <option value="antique">Antique</option>
-    <option value="lotte">Lotte</option>
   </select>
 
-  <h2>اختر طريقة التمثيل:</h2>
-  <select id="representation">
+  <label for="representation">نوع التمثيل:</label>
+  <select id="representation" onchange="onRepresentationChange()">
     <option value="tfidf">TF-IDF</option>
     <option value="embedding">Embedding</option>
     <option value="hybrid">Hybrid</option>
+    <option value="bm25">BM25</option>
   </select>
+
+  <div id="embedding_options" style="margin-top:10px;">
+    <label>طريقة البحث بالـEmbedding:</label><br/>
+    <input type="radio" id="cosine" name="embedding_method" value="cosine" checked />
+    <label for="cosine">Cosine Similarity</label><br/>
+    <input type="radio" id="faiss" name="embedding_method" value="faiss" />
+    <label for="faiss">Vector Store (Faiss)</label>
+  </div>
+
+  <div id="loading">⏳ جاري المعالجة...</div>
 
   <button onclick="runOffline()">تشغيل معالجة أولية</button>
 
-  <hr>
-  <h2>استعلام المستخدم:</h2>
-  <input type="text" id="query" placeholder="اكتب استعلامك هنا">
+  <button id="runTopicDetectionBtn" style="margin-top: 15px;">تشغيل كشف المواضيع</button>
+  <button id="toggleDarkMode" style="position: fixed; top: 10px; left: 10px; z-index: 9999;">🌙 الوضع الليلي</button>
+  <div id="topicDetectionResult"></div>
+
+  <hr/>
+
+  <label for="query">استعلام:</label>
+  <input type="text" id="query" placeholder="اكتب استعلامك هنا" autocomplete="off" />
+
+  <br/><br/>
+
   <button onclick="search()">بحث</button>
+
+  <div id="suggestion_box" style="margin: 10px 0; background: #f0f0f0; padding: 10px; border-radius: 5px;"></div>
 
   <h3>أفضل النتائج:</h3>
   <div id="results"></div>
 
   <script src="script.js"></script>
+
+  <script>
+  function hideWelcome() {
+    const welcome = document.getElementById("welcome-screen");
+    welcome.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+
+  // منع التمرير أثناء عرض شاشة الترحيب
+  window.onload = () => {
+    document.body.style.overflow = "hidden";
+  };
+</script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

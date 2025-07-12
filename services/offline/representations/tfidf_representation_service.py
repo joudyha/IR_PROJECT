@@ -22,7 +22,6 @@ def build_tfidf(dataset_name: str = Query(...)):
     if df.empty:
         return {"error": f"No documents found for dataset '{dataset_name}'"}
 
-    # ✅ نظف النصوص الخام باستخدام تابعك
     vectorizer = TfidfVectorizer(
     preprocessor=processing,
     tokenizer=tokenize,

@@ -10,7 +10,7 @@ add_cors(app)
 class CleanedQuery(BaseModel):
     query_tokens: List[str]
     dataset_name: str
-    query_id: str  # 👈 نضيف معرف للاستعلام حتى نخزنه باسم مميز
+    query_id: str 
 
 
 @app.post("/vectorize_bm25")

@@ -12,7 +12,6 @@ add_cors(app)
 def build_index(dataset_name: str = Query(...)):
     conn = sqlite3.connect(SQLITE_DB_PATH)
     
-    # استرجاع البيانات الخاصة بالـ dataset فقط
     df = pd.read_sql("SELECT doc_id, processed_text FROM docs WHERE dataset_name = ?", conn, params=(dataset_name,))
 
     index = defaultdict(set)

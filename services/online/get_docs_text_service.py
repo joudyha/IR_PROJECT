@@ -28,10 +28,8 @@ def get_docs_texts(req: DocsRequest):
     rows = cursor.fetchall()
     conn.close()
 
-    # 🧠 تحويل النتائج إلى dict: {doc_id: text}
     doc_map = {doc_id: text for doc_id, text in rows}
 
-    # ✅ ترتيب حسب ترتيب doc_ids الأصلي
     texts = [
         {"doc_id": doc_id, "text": doc_map[doc_id]}
         for doc_id in req.doc_ids if doc_id in doc_map

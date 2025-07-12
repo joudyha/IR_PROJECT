@@ -23,9 +23,8 @@ def rank_with_cosine(query_vec, doc_vecs, doc_ids):
     sims = cosine_similarity(query_vec, doc_vecs)[0]
     return sorted(zip(doc_ids, sims), key=lambda x: x[1], reverse=True)
 
-def rank_with_bm25(query_tokens, tokenized_corpus, doc_ids, candidate_indices=None):
-    bm25 = BM25Okapi(tokenized_corpus)
-    scores = bm25.get_scores(query_tokens)
+def rank_with_bm25(query_tokens, bm25_vectorizer, doc_ids, candidate_indices=None):
+    scores = bm25_vectorizer.get_scores(query_tokens)
 
     if candidate_indices is not None:
         filtered_scores = [(doc_ids[i], scores[i]) for i in candidate_indices]

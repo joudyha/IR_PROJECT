@@ -18,26 +18,26 @@ async def run_pipeline(req: DatasetRequest):
     ds = req.dataset_name
     print("running step 1 ")
 
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        step1 = await client.post(SERVICES_URL["LOAD_RAW_DOCS"], params={"dataset_name": ds}, timeout=10)
-        if step1.status_code != 200:
-            return {"error": "loading failed", "detail": step1.text}
-        print("STEP 1 done")
+    async with httpx.AsyncClient(timeout=10000) as client:
+        # step1 = await client.post(SERVICES_URL["LOAD_RAW_DOCS"], params={"dataset_name": ds}, timeout=100000)
+        # if step1.status_code != 200:
+        #     return {"error": "loading failed", "detail": step1.text}
+        # print("STEP 1 done")
 
-        print("running step 2 ")
-        step2 = await client.post(SERVICES_URL["CLEAN_STORED_DOCS"], params={"dataset_name": ds}, timeout=10)
-        if step2.status_code != 200:
-            return {"error": "cleaning failed", "detail": step2.text}
-        print("STEP 2 done")
+        # print("running step 2 ")
+        # step2 = await client.post(SERVICES_URL["CLEAN_STORED_DOCS"], params={"dataset_name": ds}, timeout=100000)
+        # if step2.status_code != 200:
+        #     return {"error": "cleaning failed", "detail": step2.text}
+        # print("STEP 2 done")
 
         print("running step 3 ")
-        step3 = await client.post(SERVICES_URL["BUILD_TFIDF"], params={"dataset_name": ds}, timeout=10)
+        step3 = await client.post(SERVICES_URL["BUILD_TFIDF"], params={"dataset_name": ds}, timeout=100000)
         if step3.status_code != 200:
             return {"error": "tfidf_representation failed", "detail": step3.text}
         print("STEP 3 done")
 
         print("running step 4 ")
-        step4 = await client.post(SERVICES_URL["INVERTED_INDEX"], params={"dataset_name": ds}, timeout=10)
+        step4 = await client.post(SERVICES_URL["INVERTED_INDEX"], params={"dataset_name": ds}, timeout=100000)
         if step4.status_code != 200:
             return {"error": "inverted_index failed", "detail": step4.text}
         print("STEP 4 done")
@@ -45,8 +45,8 @@ async def run_pipeline(req: DatasetRequest):
     return {
         "status": "Pipeline completed",
         "details": {
-            "raw_load": step1.json(),
-            "cleanning": step2.json(),
+            # "raw_load": step1.json(),
+            # "cleanning": step2.json(),
             "tfidf": step3.json(),
             "inverted_index": step4.json()
         }
