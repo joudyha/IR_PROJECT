@@ -136,6 +136,6 @@ Preprocessing → Representation → Indexing → Query → Retrieval → Rankin
 
 ---
 
-> Developed by: Ali Jihad Alali, Joudy Ayman Hamadeh, Ammar Nazir Al-Aloush, Ali Emad Mousa, Bayan Darbas, Tawfiq AL_Hammada
+> Developed by: Joudy Ayman Hamadeh,Ali Jihad Alali, Ammar Nazir Al-Aloush, Ali Emad Mousa, Bayan Darbas, Tawfiq AL_Hammada
 > Supervised by: Ms. Soulyma Mahairi ,Ms.Marwa Al_Dayah
 > Damascus University – Faculty of Informatics Engineering
