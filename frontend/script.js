@@ -251,10 +251,13 @@ function showAutocomplete(suggestions, prefix) {
     autocompleteBox.appendChild(itemDiv);
   });
 
-  queryInput.parentNode.appendChild(autocompleteBox);
+  document.body.appendChild(autocompleteBox);
   const rect = queryInput.getBoundingClientRect();
   autocompleteBox.style.top = rect.bottom + window.scrollY + "px";
   autocompleteBox.style.left = rect.left + window.scrollX + "px";
+  autocompleteBox.style.position = "absolute";
+  autocompleteBox.style.width = rect.width + "px";
+
 }
 
 function addActive(items) {

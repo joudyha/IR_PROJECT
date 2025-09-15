@@ -106,6 +106,21 @@ button:hover {
   background-color: var(--purple-light);
 }
 
+#autocomplete-list {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 4px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+}
+.autocomplete-active {
+  background-color: #eee;
+}
+
+
 .welcome-container {
   position: fixed;
   top: 0; left: 0;
